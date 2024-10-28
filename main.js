@@ -53,77 +53,117 @@ const params = {
   origin: "*"
 };
 
-const fetchImageUrl = async (fileName) => {
-  const imageParams = {
-    action: "query",
-    titles: `File:${fileName}`,
-    prop: "imageinfo",
-    iiprop: "url",
-    format: "json",
-    origin: "*"
-  };
+const placeholderImageUrl = 'https://placehold.co/60x40?text=Placeholder+Image+of+a+Bear';
 
-  const url = `${baseUrl}?${new URLSearchParams(imageParams).toString()}`;
-  
-  const res = await fetch(url);
-  const data = await res.json();
-  const pages = data.query.pages;
-  const imageUrl = Object.values(pages)[0].imageinfo[0].url;
-  
-  return imageUrl;
+const fetchImageUrl = async (fileName) => {
+  try {
+    const imageParams = {
+      action: "query",
+      titles: `File:${fileName}`,
+      prop: "imageinfo",
+      iiprop: "url",
+      format: "json",
+      origin: "*"
+    };
+
+    const url = `${baseUrl}?${new URLSearchParams(imageParams).toString()}`;
+
+    const res = await fetch(url);
+    const data = await res.json();
+
+    if (!data.query || !data.query.pages) {
+      throw new Error('Invalid data structure returned from image API.');
+    }
+
+    const pages = data.query.pages;
+    const pageValues = Object.values(pages);
+
+    if (pageValues.length === 0 || !pageValues[0].imageinfo) {
+      throw new Error(`No image info available for file: ${fileName}`);
+    }
+
+    const imageUrl = pageValues[0].imageinfo[0].url;
+    return imageUrl;
+  } catch (error) {
+    console.error(`Error fetching image URL for ${fileName}:`, error);
+    // Return null to indicate failure
+    return null;
+  }
 };
 
 const extractBears = async (wikitext) => {
-  const speciesTables = wikitext.split('{{Species table/end}}');
-  const bears = [];
+  try {
+    const speciesTables = wikitext.split('{{Species table/end}}');
+    const bears = [];
 
-  for (const table of speciesTables) {
-    const rows = table.split('{{Species table/row');
-    for (const row of rows) {
-      const nameMatch = row.match(/\|name=\[\[(.*?)\]\]/);
-      const binomialMatch = row.match(/\|binomial=(.*?)\n/);
-      const imageMatch = row.match(/\|image=(.*?)\n/);
+    for (const table of speciesTables) {
+      const rows = table.split('{{Species table/row');
+      for (const row of rows) {
+        const nameMatch = row.match(/\|name=\[\[(.*?)\]\]/);
+        const binomialMatch = row.match(/\|binomial=(.*?)\n/);
+        const imageMatch = row.match(/\|image=(.*?)\n/);
 
-      if (nameMatch && binomialMatch && imageMatch) {
-        const fileName = imageMatch[1].trim().replace('File:', '');
+        if (nameMatch && binomialMatch && imageMatch) {
+          const fileName = imageMatch[1].trim().replace('File:', '');
 
-        try {
           const imageUrl = await fetchImageUrl(fileName);
+
+          // Use the placeholder image if the image URL is invalid
+          const validImageUrl = imageUrl || placeholderImageUrl;
+
           const bear = {
             name: nameMatch[1],
             binomial: binomialMatch[1],
-            image: imageUrl,
+            image: validImageUrl,
             range: "TODO extract correct range"
           };
           bears.push(bear);
-        } catch (error) {
-          console.error(`Failed to fetch image for ${fileName}:`, error);
         }
       }
     }
-  }
 
-  // Update the UI after all bears are processed
-  const moreBearsSection = document.querySelector('.more_bears');
-  bears.forEach((bear) => {
-    moreBearsSection.innerHTML += `
-      <div>
-        <h3>${bear.name} (${bear.binomial})</h3>
-        <img src="${bear.image}" alt="${bear.name}" style="width:200px; height:auto;">
-        <p><strong>Range:</strong> ${bear.range}</p>
-      </div>
-    `;
-  });
+    // Update the UI after all bears are processed
+    const moreBearsSection = document.querySelector('.more_bears');
+    if (bears.length === 0) {
+      moreBearsSection.innerHTML = '<p>No bear data available.</p>';
+    } else {
+      bears.forEach((bear) => {
+        moreBearsSection.innerHTML += `
+          <div>
+            <h3>${bear.name} (${bear.binomial})</h3>
+            <img src="${bear.image}" alt="${bear.name}" style="width:200px; height:auto;" onerror="this.onerror=null;this.src='${placeholderImageUrl}';">
+            <p><strong>Range:</strong> ${bear.range}</p>
+          </div>
+        `;
+      });
+    }
+  } catch (error) {
+    console.error('Error extracting bear data:', error);
+    // Display an error message to the user
+    const moreBearsSection = document.querySelector('.more_bears');
+    moreBearsSection.innerHTML = '<p class="error-message">Unable to load bear data - Please try again</p>';
+  }
 };
 
 const getBearData = async () => {
-  const url = `${baseUrl}?${new URLSearchParams(params).toString()}`;
-  
-  const res = await fetch(url);
-  const data = await res.json();
-  const wikitext = data.parse.wikitext['*'];
-  
-  await extractBears(wikitext);
+  try {
+    const url = `${baseUrl}?${new URLSearchParams(params).toString()}`;
+
+    const res = await fetch(url);
+    const data = await res.json();
+
+    if (!data.parse || !data.parse.wikitext) {
+      throw new Error('Invalid data structure returned from API.');
+    }
+
+    const wikitext = data.parse.wikitext['*'];
+    await extractBears(wikitext);
+  } catch (error) {
+    console.error('Error fetching bear data:', error);
+    // Display an error message to the user
+    const moreBearsSection = document.querySelector('.more_bears');
+    moreBearsSection.innerHTML = '<p class="error-message">Unable to load bear data - Please try again</p>';
+  }
 };
 
 // Fetch and display the bear data

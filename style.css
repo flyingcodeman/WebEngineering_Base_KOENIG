@@ -248,3 +248,10 @@ audio {
 .comment-container li p:nth-child(2) {
   flex: 5;
 }
+
+.error-message {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+  font-size: 1.8rem;
+}
