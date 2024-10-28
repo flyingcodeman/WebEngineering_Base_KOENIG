@@ -102,20 +102,37 @@ const extractBears = async (wikitext) => {
         const nameMatch = row.match(/\|name=\[\[(.*?)\]\]/);
         const binomialMatch = row.match(/\|binomial=(.*?)\n/);
         const imageMatch = row.match(/\|image=(.*?)\n/);
+        const rangeMatch = row.match(/\|range\s*=\s*([^|\n]*)/);
 
         if (nameMatch && binomialMatch && imageMatch) {
           const fileName = imageMatch[1].trim().replace('File:', '');
 
           const imageUrl = await fetchImageUrl(fileName);
 
-          // Use the placeholder image if the image URL is invalid
+          // Placeholder image if the image URL is invalid
           const validImageUrl = imageUrl || placeholderImageUrl;
+
+          // Process the range value
+          let range = 'No range information available';
+
+          if (rangeMatch) {
+            range = rangeMatch[1].trim();
+
+            // Remove any wiki markup
+            range = range.replace(/\[\[|\]\]/g, '').trim();
+            range = range.replace(/''/g, '').trim();
+
+            // Handle cases where range is empty
+            if (!range) {
+              range = 'Range information not available.';
+            }
+          }
 
           const bear = {
             name: nameMatch[1],
-            binomial: binomialMatch[1],
+            binomial: binomialMatch[1].replace(/''/g, '').trim(),
             image: validImageUrl,
-            range: "TODO extract correct range"
+            range: range
           };
           bears.push(bear);
         }
@@ -144,6 +161,8 @@ const extractBears = async (wikitext) => {
     moreBearsSection.innerHTML = '<p class="error-message">Unable to load bear data - Please try again</p>';
   }
 };
+
+
 
 const getBearData = async () => {
   try {
