@@ -1,6 +1,8 @@
-import { placeholderImageUrl } from './constants.js';
+import { PLACEHOLDER_IMAGE_URL } from './constants.js';
 
-// Show/hide comments functionality
+/**
+ * Initializes the show/hide comments functionality.
+ */
 export const initializeCommentsToggle = () => {
   const showHideBtn = document.querySelector('.show-hide');
   const commentWrapper = document.querySelector('.comment-wrapper');
@@ -19,7 +21,9 @@ export const initializeCommentsToggle = () => {
   };
 };
 
-// Comment submission functionality
+/**
+ * Initializes the comment submission form functionality.
+ */
 export const initializeCommentForm = () => {
   const form = document.querySelector('.comment-form');
   const nameField = document.querySelector('#name');
@@ -34,19 +38,26 @@ export const initializeCommentForm = () => {
     const nameValue = nameField.value;
     const commentValue = commentField.value;
 
-    namePara.textContent = nameValue;
-    commentPara.textContent = commentValue;
+    if (nameValue && commentValue) {
+      namePara.textContent = nameValue;
+      commentPara.textContent = commentValue;
 
-    list.appendChild(listItem);
-    listItem.appendChild(namePara);
-    listItem.appendChild(commentPara);
+      list.appendChild(listItem);
+      listItem.appendChild(namePara);
+      listItem.appendChild(commentPara);
 
-    nameField.value = '';
-    commentField.value = '';
+      nameField.value = '';
+      commentField.value = '';
+    } else {
+      alert('Please enter both your name and comment.');
+    }
   };
 };
 
-// Update UI with bear data
+/**
+ * Updates the UI with the bear data.
+ * @param {Array} bears - An array of bear objects.
+ */
 export const updateUIWithBears = (bears) => {
   const moreBearsSection = document.querySelector('.more_bears');
   if (bears.length === 0) {
@@ -57,7 +68,7 @@ export const updateUIWithBears = (bears) => {
       moreBearsSection.innerHTML += `
         <div>
           <h3>${bear.name} (${bear.binomial})</h3>
-          <img src="${bear.image}" alt="${bear.name}" style="width:200px; height:auto;" onerror="this.onerror=null;this.src='${placeholderImageUrl}';">
+          <img src="${bear.image}" alt="${bear.name}" style="width:200px; height:auto;" onerror="this.onerror=null;this.src='${PLACEHOLDER_IMAGE_URL}';">
           <p><strong>Range:</strong> ${bear.range}</p>
         </div>
       `;
@@ -65,7 +76,10 @@ export const updateUIWithBears = (bears) => {
   }
 };
 
-// Display error message to the user
+/**
+ * Displays an error message to the user.
+ * @param {string} message - The error message to display.
+ */
 export const displayErrorMessage = (message) => {
   const moreBearsSection = document.querySelector('.more_bears');
   moreBearsSection.innerHTML = `<p class="error-message">${message}</p>`;

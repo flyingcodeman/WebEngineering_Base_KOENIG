@@ -1,10 +1,13 @@
 import { fetchData } from './api.js';
-import { params, placeholderImageUrl } from './constants.js';
+import { API_PARAMS, PLACEHOLDER_IMAGE_URL, ERROR_MESSAGES } from './constants.js';
 import { updateUIWithBears, displayErrorMessage } from './ui.js';
 
+/**
+ * Fetches bear data from the Wikipedia API and processes it.
+ */
 export const getBearData = async () => {
   try {
-    const data = await fetchData(params);
+    const data = await fetchData(API_PARAMS);
 
     if (!data.parse || !data.parse.wikitext) {
       throw new Error('Invalid data structure returned from API.');
@@ -15,43 +18,15 @@ export const getBearData = async () => {
     updateUIWithBears(bears);
   } catch (error) {
     console.error('Error fetching bear data:', error);
-    displayErrorMessage('Unable to load bear data - Please try again');
+    displayErrorMessage(ERROR_MESSAGES.FETCH_BEAR_DATA);
   }
 };
 
-const fetchImageUrl = async (fileName) => {
-  try {
-    const imageParams = {
-      action: "query",
-      titles: `File:${fileName}`,
-      prop: "imageinfo",
-      iiprop: "url",
-      format: "json",
-      origin: "*"
-    };
-
-    const data = await fetchData(imageParams);
-
-    if (!data.query || !data.query.pages) {
-      throw new Error('Invalid data structure returned from image API.');
-    }
-
-    const pages = data.query.pages;
-    const pageValues = Object.values(pages);
-
-    if (pageValues.length === 0 || !pageValues[0].imageinfo) {
-      throw new Error(`No image info available for file: ${fileName}`);
-    }
-
-    const imageUrl = pageValues[0].imageinfo[0].url;
-    return imageUrl;
-  } catch (error) {
-    console.error(`Error fetching image URL for ${fileName}:`, error);
-    // Return placeholder image URL to ensure image always displays
-    return placeholderImageUrl;
-  }
-};
-
+/**
+ * Extracts bear information from the wikitext.
+ * @param {string} wikitext - The wikitext content from the API.
+ * @returns {Array} An array of bear objects.
+ */
 const extractBears = async (wikitext) => {
   const speciesTables = wikitext.split('{{Species table/end}}');
   const bears = [];
@@ -89,7 +64,7 @@ const extractBears = async (wikitext) => {
           name: nameMatch[1],
           binomial: binomialMatch[1].replace(/''/g, '').trim(),
           image: imageUrl,
-          range: range
+          range: range,
         };
         bears.push(bear);
       }
@@ -97,4 +72,42 @@ const extractBears = async (wikitext) => {
   }
 
   return bears;
+};
+
+/**
+ * Fetches the image URL for a given file name.
+ * @param {string} fileName - The name of the image file.
+ * @returns {Promise<string>} The URL of the image.
+ */
+const fetchImageUrl = async (fileName) => {
+  try {
+    const imageParams = {
+      action: 'query',
+      titles: `File:${fileName}`,
+      prop: 'imageinfo',
+      iiprop: 'url',
+      format: 'json',
+      origin: '*',
+    };
+
+    const data = await fetchData(imageParams);
+
+    if (!data.query || !data.query.pages) {
+      throw new Error('Invalid data structure returned from image API.');
+    }
+
+    const pages = data.query.pages;
+    const pageValues = Object.values(pages);
+
+    if (pageValues.length === 0 || !pageValues[0].imageinfo) {
+      throw new Error(`No image info available for file: ${fileName}`);
+    }
+
+    const imageUrl = pageValues[0].imageinfo[0].url;
+    return imageUrl;
+  } catch (error) {
+    console.error(`Error fetching image URL for ${fileName}:`, error);
+    // Return placeholder image URL to ensure image always displays
+    return PLACEHOLDER_IMAGE_URL;
+  }
 };
