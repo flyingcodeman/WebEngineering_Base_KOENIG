@@ -66,8 +66,10 @@ Fix application code and answer the questions:
 <font size="7">Welcome to our wildlife website</font>
 ```
 
-**Why It's Bad**: The <font> tag is obsolete in HTML5 and should not be used. It leads to poor separation of content and presentation, making the code less maintainable and harder to style consistently. Modern web development standards recommend using CSS for styling instead.
-**Fix**: Replaced <font> tags with semantic HTML elements like <h1>, <h2>, and <h3>, and moved styling to CSS.
+**Why It's Bad**: The `<font>` tag is obsolete in HTML5 and should not be used. It leads to poor separation of content and presentation, making the code less maintainable and harder to style consistently. Modern web development standards recommend using CSS for styling instead.
+
+**Fix**: Replaced `<font>` tags with semantic HTML elements like `<h1>`, `<h2>`, and `<h3>`, and moved styling to CSS.
+
 **Good Practice Example**:
 
 ```JS
@@ -75,7 +77,9 @@ Fix application code and answer the questions:
 ```
 
 **2. Lack of Semantic HTML Elements**
-**Issue**: The HTML structure did not utilize semantic elements, using generic <div> elements instead.
+
+**Issue**: The HTML structure did not utilize semantic elements, using generic `<div>` elements instead.
+
 **Bad Practice Example**:
 
 ```JS
@@ -84,8 +88,10 @@ Fix application code and answer the questions:
 </div>
 ```
 
-**Why It's Bad**: Not using semantic elements reduces the accessibility and readability of the code. Semantic elements like <header>, <nav>, <main>, and <footer> provide meaningful context about the content, which is beneficial for SEO and assistive technologies.
-**Fix**: Replaced generic <div> elements with appropriate semantic HTML5 elements.
+**Why It's Bad**: Not using semantic elements reduces the accessibility and readability of the code. Semantic elements like `<header>`, `<nav>`, `<main>`, and `<footer>` provide meaningful context about the content, which is beneficial for SEO and assistive technologies.
+
+**Fix**: Replaced generic `<div>` elements with appropriate semantic HTML5 elements.
+
 **Good Practice Example**:
 
 ```JS
@@ -95,7 +101,9 @@ Fix application code and answer the questions:
 ```
 
 **3. Inefficient and Deprecated CSS Selectors**
-**Issue**: CSS selectors targeted deprecated HTML attributes, such as font[size="7"].
+
+**Issue**: CSS selectors targeted deprecated HTML attributes, such as `font[size="7"]`.
+
 **Bad Practice Example**:
 
 ```JS
@@ -105,7 +113,9 @@ font[size="7"] {
 ```
 
 **Why It's Bad**: Using selectors based on deprecated attributes can lead to maintenance challenges and unpredictability in styling. It's better to target elements or classes that reflect the current HTML structure.
+
 **Fix**: Updated CSS selectors to target semantic elements directly.
+
 **Good Practice Example**:
 
 ```JS
@@ -115,15 +125,19 @@ h1 {
 ```
 
 **4. Invalid Color Values in CSS**
-**Issue**: Hex color values in CSS were missing the # symbol.
+
+**Issue**: Hex color values in CSS were missing the `#` symbol.
+
 **Bad Practice Example**:
 
 ```JS
 background-color: ff80ff;
 ```
 
-**Why It's Bad**: Without the #, the color value is invalid, and the browser may ignore it or produce unexpected results. This leads to inconsistent styling across different browsers.
-**Fix**: Added the # symbol to all hex color values to ensure they are valid.
+**Why It's Bad**: Without the `#`, the color value is invalid, and the browser may ignore it or produce unexpected results. This leads to inconsistent styling across different browsers.
+
+**Fix**: Added the `#` symbol to all hex color values to ensure they are valid.
+
 **Good Practice Example**:
 
 ```JS
@@ -131,7 +145,9 @@ background-color: #ff80ff;
 ```
 
 **5. Overly Specific CSS Selectors**
-**Issue**: Selectors like div[class="nav"] were unnecessarily specific.
+
+**Issue**: Selectors like `div[class="nav"]` were unnecessarily specific.
+
 **Bad Practice Example**:
 
 ```JS
@@ -141,7 +157,9 @@ div[class="nav"] {
 ```
 
 **Why It's Bad**: Overly specific selectors make the CSS harder to read and maintain. They can also lead to specificity wars, where it's challenging to override styles without increasing specificity even further.
+
 **Fix**: Simplified selectors to target classes or semantic elements.
+
 **Good Practice Example**:
 
 ```JS
@@ -151,7 +169,9 @@ nav {
 ```
 
 **6. Global Variables and Scope Issues in JavaScript**
+
 **Issue**: Variables were declared without const or let, potentially polluting the global scope.
+
 **Bad Practice Example**:
 
 ```JS
@@ -159,7 +179,9 @@ showHideBtn = document.querySelector('.show-hide');
 ```
 
 **Why It's Bad**: Failing to declare variables with const or let defaults them to global scope, which can cause conflicts and unintended side effects in larger codebases.
+
 **Fix**: Declared variables using const or let to ensure proper scoping.
+
 **Good Practice Example**:
 
 ```JS
@@ -167,7 +189,9 @@ const showHideBtn = document.querySelector('.show-hide');
 ```
 
 **7. Inconsistent Naming Conventions**
+
 **Issue**: Variable and function names did not consistently use camelCase, making the code less readable.
+
 **Bad Practice Example**:
 
 ```JS
@@ -175,7 +199,9 @@ const placeholder_image_url = '...';
 ```
 
 **Why It's Bad**: Inconsistent naming conventions can confuse developers and make the code harder to read and maintain. camelCase is the standard naming convention for variables and functions in JavaScript.
+
 **Fix**: Standardized naming conventions to camelCase throughout the codebase.
+
 **Good Practice Example**:
 
 ```JS
@@ -183,7 +209,9 @@ const placeholderImageUrl = '...';
 ```
 
 **8. Hardcoded Strings (Magic Numbers and Strings)**
+
 **Issue**: Repeated use of hardcoded strings and values scattered throughout the code.
+
 **Bad Practice Example**:
 
 ```JS
@@ -195,7 +223,9 @@ if (!data.query || !data.query.pages) {
 ```
 
 **Why It's Bad**: Hardcoded strings and numbers (magic values) make the code less flexible and harder to maintain. Changes require finding and updating multiple instances, increasing the risk of errors.
+
 **Fix**: Defined constants in a separate configuration file (constants.js) to centralize values and make them easier to manage.
+
 **Good Practice Example**:
 
 ```JS
@@ -216,7 +246,9 @@ if (!data.query || !data.query.pages) {
 ```
 
 **9. Lack of Comments and Documentation**
+
 **Issue**: Functions and complex code blocks lacked explanatory comments, making the code harder to understand.
+
 **Bad Practice Example**:
 
 ```JS
@@ -226,7 +258,9 @@ const extractBears = async (wikitext) => {
 ```
 
 **Why It's Bad**: Without comments, it becomes difficult for others (or your future self) to understand the purpose and functionality of the code, which hinders collaboration and maintenance.
+
 **Fix**: Added descriptive comments and used JSDoc to document functions, parameters, and return values.
+
 **Good Practice Example**:
 
 ```JS
@@ -241,7 +275,9 @@ const extractBears = async (wikitext) => {
 ```
 
 **10. Error Messages Could Be More Descriptive**
+
 **Issue**: Error messages provided to users were generic and did not guide them on how to resolve the issue.
+
 **Bad Practice Example**:
 
 ```JS
@@ -249,7 +285,9 @@ displayErrorMessage('Unable to load bear data - Please try again');
 ```
 
 **Why It's Bad**: Generic error messages can frustrate users and don't offer any actionable advice or insight into what went wrong.
+
 **Fix**: Enhanced error messages to be more informative and stored them in constants for consistency.
+
 **Good Practice Example**:
 
 ```JS
@@ -261,7 +299,9 @@ displayErrorMessage(ERROR_MESSAGES.FETCH_BEAR_DATA);
 ```
 
 **11. Improper Use of HTML Elements for Accessibility**
+
 **Issue**: Images lacked alt attributes, and form inputs were not properly associated with labels.
+
 **Bad Practice Example**:
 
 ```JS
@@ -270,7 +310,9 @@ displayErrorMessage(ERROR_MESSAGES.FETCH_BEAR_DATA);
 ```
 
 **Why It's Bad**: Omitting alt attributes on images hinders accessibility for users relying on screen readers. Similarly, inputs without associated labels make forms difficult to navigate for assistive technologies.
+
 **Fix**: Added meaningful alt attributes to images and used <label> elements linked to input fields via the for and id attributes.
+
 **Good Practice Example**:
 
 ```JS
@@ -280,7 +322,9 @@ displayErrorMessage(ERROR_MESSAGES.FETCH_BEAR_DATA);
 ```
 
 **12. CORS Issues Due to Local File Protocol**
-**Issue**: Running the application directly from the file:// protocol caused Cross-Origin Resource Sharing (CORS) issues, preventing the application from fetching data from external APIs.
+
+**Issue**: Running the application directly from the `file://` protocol caused Cross-Origin Resource Sharing (CORS) issues, preventing the application from fetching data from external APIs.
+
 **Bad Practice Example**:
 
 ```JS
@@ -291,7 +335,9 @@ fetch('https://en.wikipedia.org/w/api.php?...')
 ```
 
 **Why It's Bad**: Modern browsers enforce CORS policies that block cross-origin requests made from local files for security reasons.
-**Fix**: Set up a local development server to serve the files over http://localhost, which adheres to CORS policies and allows external API requests.
+
+**Fix**: Set up a local development server to serve the files over `http://localhost`, which adheres to CORS policies and allows external API requests.
+
 **Good Practice Example**:
 
 ```JS
