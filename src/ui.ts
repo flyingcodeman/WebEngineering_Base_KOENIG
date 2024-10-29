@@ -1,4 +1,4 @@
-import { PLACEHOLDER_IMAGE_URL } from './constants.js';
+import { PLACEHOLDER_IMAGE_URL } from './constants';
 
 /**
  * Initializes the show/hide comments functionality.

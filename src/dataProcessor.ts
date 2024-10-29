@@ -1,6 +1,6 @@
-import { fetchData } from './api.js';
-import { API_PARAMS, PLACEHOLDER_IMAGE_URL, ERROR_MESSAGES } from './constants.js';
-import { updateUIWithBears, displayErrorMessage } from './ui.js';
+import { fetchData } from './api';
+import { API_PARAMS, PLACEHOLDER_IMAGE_URL, ERROR_MESSAGES } from './constants';
+import { updateUIWithBears, displayErrorMessage } from './ui';
 
 /**
  * Fetches bear data from the Wikipedia API and processes it.
