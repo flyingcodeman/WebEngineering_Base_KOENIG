@@ -56,7 +56,8 @@ Fix application code and answer the questions:
 
 >  **What bad coding practices did you find? Why is it a bad practice and how did you fix it?**
 
-## 1. Use of Deprecated `<font>` Tags
+
+**1. Use of Deprecated `<font>` Tags**
 
 **Issue**: The HTML code used deprecated `<font>` tags for styling text.
 
@@ -75,6 +76,7 @@ Fix application code and answer the questions:
 ```JS
 <h1>Welcome to our wildlife website</h1>
 ```
+
 
 **2. Lack of Semantic HTML Elements**
 
@@ -100,6 +102,7 @@ Fix application code and answer the questions:
 </header>
 ```
 
+
 **3. Inefficient and Deprecated CSS Selectors**
 
 **Issue**: CSS selectors targeted deprecated HTML attributes, such as `font[size="7"]`.
@@ -124,6 +127,7 @@ h1 {
 }
 ```
 
+
 **4. Invalid Color Values in CSS**
 
 **Issue**: Hex color values in CSS were missing the `#` symbol.
@@ -143,6 +147,7 @@ background-color: ff80ff;
 ```JS
 background-color: #ff80ff;
 ```
+
 
 **5. Overly Specific CSS Selectors**
 
@@ -168,6 +173,7 @@ nav {
 }
 ```
 
+
 **6. Global Variables and Scope Issues in JavaScript**
 
 **Issue**: Variables were declared without const or let, potentially polluting the global scope.
@@ -188,6 +194,7 @@ showHideBtn = document.querySelector('.show-hide');
 const showHideBtn = document.querySelector('.show-hide');
 ```
 
+
 **7. Inconsistent Naming Conventions**
 
 **Issue**: Variable and function names did not consistently use camelCase, making the code less readable.
@@ -207,6 +214,7 @@ const placeholder_image_url = '...';
 ```JS
 const placeholderImageUrl = '...';
 ```
+
 
 **8. Hardcoded Strings (Magic Numbers and Strings)**
 
@@ -245,6 +253,7 @@ if (!data.query || !data.query.pages) {
 }
 ```
 
+
 **9. Lack of Comments and Documentation**
 
 **Issue**: Functions and complex code blocks lacked explanatory comments, making the code harder to understand.
@@ -274,6 +283,7 @@ const extractBears = async (wikitext) => {
 };
 ```
 
+
 **10. Error Messages Could Be More Descriptive**
 
 **Issue**: Error messages provided to users were generic and did not guide them on how to resolve the issue.
@@ -298,6 +308,7 @@ export const ERROR_MESSAGES = {
 displayErrorMessage(ERROR_MESSAGES.FETCH_BEAR_DATA);
 ```
 
+
 **11. Improper Use of HTML Elements for Accessibility**
 
 **Issue**: Images lacked alt attributes, and form inputs were not properly associated with labels.
@@ -320,6 +331,7 @@ displayErrorMessage(ERROR_MESSAGES.FETCH_BEAR_DATA);
 <label for="name">Your name:</label>
 <input type="text" name="name" id="name">
 ```
+
 
 **12. CORS Issues Due to Local File Protocol**
 
