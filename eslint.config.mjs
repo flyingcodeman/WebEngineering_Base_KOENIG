@@ -21,10 +21,6 @@ export default [
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',
-      globals: {
-        ...js.environments.browser.globals,
-        ...js.environments.es2021.globals,
-      },
     },
     ...js.configs.recommended,
   },
@@ -39,10 +35,6 @@ export default [
       },
       ecmaVersion: 'latest',
       sourceType: 'module',
-      globals: {
-        ...js.environments.browser.globals,
-        ...js.environments.es2021.globals,
-      },
     },
     plugins: {
       '@typescript-eslint': typescriptPlugin,

@@ -4,4 +4,4 @@ import { initializeCommentsToggle, initializeCommentForm } from './ui';
 initializeCommentsToggle();
 initializeCommentForm();
 
-getBearData();
+void getBearData(); // Added 'void' to ignore the promise
