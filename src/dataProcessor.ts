@@ -1,13 +1,53 @@
+// dataProcessor.ts
+
 import { fetchData } from './api';
 import { API_PARAMS, PLACEHOLDER_IMAGE_URL, ERROR_MESSAGES } from './constants';
 import { updateUIWithBears, displayErrorMessage } from './ui';
 
 /**
+ * Interface representing a bear.
+ */
+interface Bear {
+  name: string;
+  binomial: string;
+  image: string;
+  range: string;
+}
+
+/**
+ * Interface for the response from the Wikipedia parse API.
+ */
+interface ParseResponse {
+  parse: {
+    wikitext: {
+      '*': string;
+    };
+  };
+}
+
+/**
+ * Interface for the response from the Wikipedia image info API.
+ */
+interface ImageInfoResponse {
+  query: {
+    pages: {
+      [key: string]: ImageInfoPage;
+    };
+  };
+}
+
+interface ImageInfoPage {
+  imageinfo?: Array<{
+    url: string;
+  }>;
+}
+
+/**
  * Fetches bear data from the Wikipedia API and processes it.
  */
-export const getBearData = async () => {
+export const getBearData = async (): Promise<void> => {
   try {
-    const data = await fetchData(API_PARAMS);
+    const data = await fetchData<ParseResponse>(API_PARAMS);
 
     if (!data.parse || !data.parse.wikitext) {
       throw new Error('Invalid data structure returned from API.');
@@ -24,12 +64,12 @@ export const getBearData = async () => {
 
 /**
  * Extracts bear information from the wikitext.
- * @param {string} wikitext - The wikitext content from the API.
- * @returns {Array} An array of bear objects.
+ * @param wikitext - The wikitext content from the API.
+ * @returns An array of bear objects.
  */
-const extractBears = async (wikitext) => {
+const extractBears = async (wikitext: string): Promise<Bear[]> => {
   const speciesTables = wikitext.split('{{Species table/end}}');
-  const bears = [];
+  const bears: Bear[] = [];
 
   for (const table of speciesTables) {
     const rows = table.split('{{Species table/row');
@@ -60,7 +100,7 @@ const extractBears = async (wikitext) => {
           }
         }
 
-        const bear = {
+        const bear: Bear = {
           name: nameMatch[1],
           binomial: binomialMatch[1].replace(/''/g, '').trim(),
           image: imageUrl,
@@ -76,10 +116,10 @@ const extractBears = async (wikitext) => {
 
 /**
  * Fetches the image URL for a given file name.
- * @param {string} fileName - The name of the image file.
- * @returns {Promise<string>} The URL of the image.
+ * @param fileName - The name of the image file.
+ * @returns The URL of the image.
  */
-const fetchImageUrl = async (fileName) => {
+const fetchImageUrl = async (fileName: string): Promise<string> => {
   try {
     const imageParams = {
       action: 'query',
@@ -90,20 +130,28 @@ const fetchImageUrl = async (fileName) => {
       origin: '*',
     };
 
-    const data = await fetchData(imageParams);
+    const data = await fetchData<ImageInfoResponse>(imageParams);
 
     if (!data.query || !data.query.pages) {
       throw new Error('Invalid data structure returned from image API.');
     }
 
     const pages = data.query.pages;
+
+    // Convert pages object to an array of ImageInfoPage
     const pageValues = Object.values(pages);
 
-    if (pageValues.length === 0 || !pageValues[0].imageinfo) {
+    if (pageValues.length === 0) {
       throw new Error(`No image info available for file: ${fileName}`);
     }
 
-    const imageUrl = pageValues[0].imageinfo[0].url;
+    const page = pageValues[0];
+
+    if (!page.imageinfo || page.imageinfo.length === 0) {
+      throw new Error(`No image info available for file: ${fileName}`);
+    }
+
+    const imageUrl = page.imageinfo[0].url;
     return imageUrl;
   } catch (error) {
     console.error(`Error fetching image URL for ${fileName}:`, error);

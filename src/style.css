@@ -1,6 +1,7 @@
 /* General setup */
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
 }
@@ -18,12 +19,18 @@ body {
 
 /* Typography */
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-family: 'Sonsie One', cursive;
   color: #2a2a2a;
 }
 
-p, input, li, table, label {
+p,
+input,
+li,
+table,
+label {
   font-family: 'Open Sans Condensed', sans-serif;
   color: #2a2a2a;
 }
@@ -44,18 +51,25 @@ h3 {
   font-size: 2.2rem;
 }
 
-p, li, table {
+p,
+li,
+table {
   font-size: 1.6rem;
   line-height: 1.5;
 }
 
 /* Header layout */
 
-nav, article, footer, .secondary {
+nav,
+article,
+footer,
+.secondary {
   background-color: green;
 }
 
-article, footer, .secondary {
+article,
+footer,
+.secondary {
   padding: 10px 30px;
 }
 
@@ -107,11 +121,11 @@ nav .search {
   height: 32px;
 }
 
-.search input[type="search"] {
+.search input[type='search'] {
   flex: 3;
 }
 
-.search input[type="submit"] {
+.search input[type='submit'] {
   flex: 1;
   margin-left: 1rem;
   background: #333;
@@ -145,7 +159,8 @@ table {
   border-collapse: collapse;
 }
 
-th, td {
+th,
+td {
   padding: 10px;
 }
 
@@ -153,7 +168,7 @@ td {
   text-align: center;
 }
 
-th[scope="col"] {
+th[scope='col'] {
   border-bottom: 1px solid black;
 }
 
@@ -163,7 +178,8 @@ tbody tr:nth-child(odd) {
 
 /* Styling content images and audio */
 
-img, audio {
+img,
+audio {
   display: block;
   margin: 0 auto;
 }
@@ -212,18 +228,21 @@ audio {
   width: 150px;
 }
 
-.comment-form input, .comment-form label, .show-hide {
+.comment-form input,
+.comment-form label,
+.show-hide {
   font-size: 1.6rem;
   line-height: 32px;
 }
 
-.comment-form input[type="submit"], .show-hide {
+.comment-form input[type='submit'],
+.show-hide {
   background: #333;
   border: 0;
   color: white;
 }
 
-.comment-form input[type="submit"] {
+.comment-form input[type='submit'] {
   width: 30%;
   display: block;
   margin: 0 auto;

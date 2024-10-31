@@ -5,7 +5,9 @@ import { BASE_URL } from './constants';
  * @param {Object} apiParams - The parameters for the API call.
  * @returns {Promise<Object>} The JSON response from the API.
  */
-export const fetchData = async (apiParams) => {
+export const fetchData = async (
+  apiParams: Record<string, string>
+): Promise<any> => {
   const url = `${BASE_URL}?${new URLSearchParams(apiParams).toString()}`;
   const res = await fetch(url);
   if (!res.ok) {

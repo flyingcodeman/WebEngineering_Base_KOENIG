@@ -10,7 +10,8 @@ export const API_PARAMS = {
   origin: '*',
 };
 
-export const PLACEHOLDER_IMAGE_URL = 'https://placehold.co/200x150?text=No+Image';
+export const PLACEHOLDER_IMAGE_URL =
+  'https://placehold.co/200x150?text=No+Image';
 
 export const ERROR_MESSAGES = {
   FETCH_BEAR_DATA: 'Unable to load bear data. Please try again later.',
