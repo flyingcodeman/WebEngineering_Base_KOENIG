@@ -65,7 +65,7 @@ export const getBearData = async (): Promise<void> => {
  * @param wikitext - The wikitext content from the API.
  * @returns An array of bear objects.
  */
-const extractBears = async (wikitext: string): Promise<Bear[]> => {
+export const extractBears = async (wikitext: string): Promise<Bear[]> => {
   const speciesTables = wikitext.split('{{Species table/end}}');
   const bears: Bear[] = [];
 
