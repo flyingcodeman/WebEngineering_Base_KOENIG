@@ -410,6 +410,18 @@ Apply the following ruleset for Prettier:
 
 Present your findings here...
 
+**Switching from JavaScript to TypeScript has improved my codebase noticibly by:**
+
+**1: Improved Readability and Maintainability:**
+ Explicit types and interfaces make the code self-explanatory, which is beneficial for collaboration and future development.
+
+**2: Ensuring Null Safety:**
+ Early detection of null or undefined values reduces runtime crashes. It was a pain in the ass setting this up on a mac and get working versions, but if it works, it is very smooth.
+
+**3: Promoting Modularity:** Encourages better code organization and reuse through a robust module system - already introduced at the beginning, in modularizing the main.js into different topic-related files.
+
+
+
 ## 3.	CI/CD Pipeline Playground (5 Pts.)
 Implementation of a CI/CD pipeline to automate the development and deployment process – write automated tests.
 
