@@ -17,13 +17,15 @@ describe('fetchData', () => {
     const mockResponse = { data: 'test' };
     mockFetch.mockResolvedValueOnce({
       ok: true,
-      json: async () => mockResponse,
+      json: () => Promise.resolve(mockResponse), // Removed 'async' keyword
     });
 
     const params = { action: 'test', page: 'Test_Page' };
     const data = await fetchData<{ data: string }>(params);
 
-    expect(mockFetch).toHaveBeenCalledWith(`${BASE_URL}?action=test&page=Test_Page`);
+    expect(mockFetch).toHaveBeenCalledWith(
+      `${BASE_URL}?action=test&page=Test_Page`
+    );
     expect(data).toEqual(mockResponse);
   });
 

@@ -137,7 +137,7 @@ const fetchImageUrl = async (fileName: string): Promise<string> => {
     const pages = data.query.pages;
 
     // Convert pages object to an array of ImageInfoPage
-    const pageValues = Object.values(pages) as ImageInfoPage[];
+    const pageValues = Object.values(pages);
 
     if (pageValues.length === 0) {
       throw new Error(`No image info available for file: ${fileName}`);

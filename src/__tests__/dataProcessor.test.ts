@@ -17,7 +17,8 @@ describe('extractBears', () => {
       {
         name: 'Polar Bear',
         binomial: 'Ursus maritimus',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/3/35/Polar_bear.jpg', 
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/3/35/Polar_bear.jpg',
         range: 'Arctic Circle',
       },
     ];
