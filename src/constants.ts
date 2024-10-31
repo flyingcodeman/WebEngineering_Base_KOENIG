@@ -1,11 +1,11 @@
 export const BASE_URL = 'https://en.wikipedia.org/w/api.php';
 export const TITLE = 'List_of_ursids';
 
-export const API_PARAMS = {
+export const API_PARAMS: Record<string, string> = {
   action: 'parse',
   page: TITLE,
   prop: 'wikitext',
-  section: 3,
+  section: '3', // Changed from number to string
   format: 'json',
   origin: '*',
 };

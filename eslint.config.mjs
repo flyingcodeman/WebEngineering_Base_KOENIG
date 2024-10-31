@@ -15,7 +15,20 @@ export default [
   {
     ignores: ['node_modules', 'dist', '.eslintrc.js'],
   },
-  js.configs.recommended,
+  // Base JavaScript Configuration
+  {
+    files: ['**/*.js', '**/*.jsx'],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      globals: {
+        ...js.environments.browser.globals,
+        ...js.environments.es2021.globals,
+      },
+    },
+    ...js.configs.recommended,
+  },
+  // TypeScript Configuration
   {
     files: ['**/*.ts', '**/*.tsx'],
     languageOptions: {
@@ -24,14 +37,23 @@ export default [
         project: './tsconfig.json',
         tsconfigRootDir: __dirname,
       },
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      globals: {
+        ...js.environments.browser.globals,
+        ...js.environments.es2021.globals,
+      },
     },
     plugins: {
       '@typescript-eslint': typescriptPlugin,
       prettier: prettierPlugin,
     },
     rules: {
+      // TypeScript ESLint Recommended Rules
       ...typescriptPlugin.configs.recommended.rules,
+      // TypeScript ESLint Rules Requiring Type Checking
       ...typescriptPlugin.configs['recommended-requiring-type-checking'].rules,
+      // Prettier Config
       ...prettierConfig.rules,
       'prettier/prettier': 'error',
     },

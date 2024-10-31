@@ -1,5 +1,3 @@
-// dataProcessor.ts
-
 import { fetchData } from './api';
 import { API_PARAMS, PLACEHOLDER_IMAGE_URL, ERROR_MESSAGES } from './constants';
 import { updateUIWithBears, displayErrorMessage } from './ui';
@@ -139,7 +137,7 @@ const fetchImageUrl = async (fileName: string): Promise<string> => {
     const pages = data.query.pages;
 
     // Convert pages object to an array of ImageInfoPage
-    const pageValues = Object.values(pages);
+    const pageValues = Object.values(pages) as ImageInfoPage[];
 
     if (pageValues.length === 0) {
       throw new Error(`No image info available for file: ${fileName}`);
