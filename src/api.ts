@@ -13,6 +13,6 @@ export const fetchData = async <T>(
   if (!res.ok) {
     throw new Error(`HTTP error! status: ${res.status}`);
   }
-  const data: T = await res.json();
+  const data = (await res.json()) as T; // Added type assertion
   return data;
 };
