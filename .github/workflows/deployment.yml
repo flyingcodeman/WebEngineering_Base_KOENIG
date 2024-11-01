@@ -10,18 +10,28 @@ permissions:
 
 jobs:
   build-and-deploy:
-    uses: ./.github/workflows/ci.yml
-    with:
-      run_build: true  # Runs the build step for deployment
-
-  deploy:
-    needs: build-and-deploy
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          node-version: '18' 
+
+      - name: Install Dependencies
+        run: npm install --force
+
+      - name: Run Lint
+        run: npm run lint --force
+
+      - name: Run Tests
+        run: npm run test --force
+
+      - name: Build Application
+        run: npm run build --force
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
