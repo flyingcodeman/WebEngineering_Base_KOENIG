@@ -1,0 +1,155 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Web Engineering Coding Playground</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Sonsie+One"
+      rel="stylesheet"
+    />
+    <script type="module" crossorigin src="/WebEngineering_Base_KOENIG/assets/index-Cm5SY8sB.js"></script>
+    <link rel="stylesheet" crossorigin href="/WebEngineering_Base_KOENIG/assets/index-B9SK-5HF.css">
+  </head>
+
+  <body>
+    <header class="header">
+      <h1>Welcome to our wildlife website</h1>
+    </header>
+
+    <nav class="nav">
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Our Team</a></li>
+        <li><a href="#">Projects</a></li>
+        <li><a href="#">Blog</a></li>
+      </ul>
+
+      <form class="search">
+        <input type="search" name="q" placeholder="Search query" />
+        <input type="submit" value="Go!" />
+      </form>
+    </nav>
+
+    <main>
+      <article>
+        <h2>The Trouble with Bears</h2>
+        <p>
+          Bears are a group of large mammals found throughout the world. They
+          are known for their strength, intelligence, and adaptability.
+        </p>
+        <h3>Wild Bears</h3>
+        <img
+          src="/WebEngineering_Base_KOENIG/media/wild-bear.jpg"
+          alt="A wild bear in its natural habitat"
+        />
+        <p>
+          Wild bears can be found in forests, mountains, and arctic regions.
+          They play a crucial role in maintaining the balance of their
+          ecosystems.
+        </p>
+        <h3>Urban Bears</h3>
+        <img
+          src="/WebEngineering_Base_KOENIG/media/urban-bear.jpg"
+          alt="An urban bear exploring the city"
+        />
+        <p>
+          Occasionally, bears venture into urban areas in search of food. This
+          can lead to encounters with humans, which are often dangerous for both
+          parties.
+        </p>
+        <h3>Mating Rituals</h3>
+        <p>
+          Bears are solitary animals but come together during mating season.
+          They have complex mating rituals, and males may compete for the
+          attention of females.
+        </p>
+        <p>
+          The following audio clip provides more details about bear mating
+          rituals, along with samples and quotes from experts.
+        </p>
+        <audio controls>
+          <source src="/WebEngineering_Base_KOENIG/media/bear.mp3" type="audio/mp3" />
+          <source src="/WebEngineering_Base_KOENIG/media/bear.ogg" type="audio/ogg" />
+          <p>It looks like your browser doesn't support HTML5 audio players.</p>
+        </audio>
+
+        <aside>
+          <h3>About the Author</h3>
+          <p>
+            Evan Wild is a wildlife enthusiast and freelance writer. He has
+            dedicated his life to studying bears and advocating for their
+            conservation.
+          </p>
+        </aside>
+
+        <section class="comments">
+          <div class="show-hide">Show comments</div>
+
+          <div class="comment-wrapper">
+            <h2>Add Comment</h2>
+
+            <form class="comment-form">
+              <div class="flex-pair">
+                <label for="name">Your name:</label>
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  placeholder="Enter your name"
+                />
+              </div>
+              <div class="flex-pair">
+                <label for="comment">Your comment:</label>
+                <input
+                  type="text"
+                  name="comment"
+                  id="comment"
+                  placeholder="Enter your comment"
+                />
+              </div>
+              <div>
+                <input type="submit" value="Submit comment" />
+              </div>
+            </form>
+
+            <h2>Comments</h2>
+
+            <ul class="comment-container">
+              <li>
+                <p>Bob Fossil</p>
+                <p>
+                  Oh, I am so glad you taught me all about the big brown angry
+                  guys in the woods. With their sniffing little noses and their
+                  bad attitudes, they can sure be a menace—I was thinking of
+                  putting them all in a truck and driving them outta here. I run
+                  a zoo, you know.
+                </p>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="more_bears">
+          <h3>More Bears</h3>
+          <!-- Bear data will be dynamically inserted here -->
+        </section>
+      </article>
+
+      <aside class="secondary">
+        <h2>Related</h2>
+        <ul>
+          <li><a href="#">The Trouble with Bees</a></li>
+          <li><a href="#">The Trouble with Otters</a></li>
+          <li><a href="#">The Trouble with Penguins</a></li>
+          <li><a href="#">The Trouble with Octopi</a></li>
+          <li><a href="#">The Trouble with Lemurs</a></li>
+        </ul>
+      </aside>
+    </main>
+
+    <footer>
+      <p>&copy; 2050 by nobody. All rights reversed.</p>
+    </footer>
+
+  </body>
+</html>
