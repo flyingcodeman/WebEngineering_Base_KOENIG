@@ -9,6 +9,4 @@ jobs:
   ci:
     uses: ./.github/workflows/ci.yml
     with:
-      run_build: false
-    secrets:
-      github_token: ${{ secrets.GITHUB_TOKEN }}
+      run_build: false  # Skips the build step in development
