@@ -445,19 +445,43 @@ Use the tools presented in our accessibility workshop to test the accessibility 
 
 Test the current color contrast (text/background), report the results of the test, and then fix them by changing the assigned colors.
 
-*Present your reports here.*
+Initially 24 contrast errors overall.
+- h1 heading element: Contrast Ratio: 1.34:1
+- 4 navigation elem.: Contrast Ratio: 4.08:1
+- 6 heading elements: Contrast Ratio: 2.79:1
+- 7 subtext element: Contrast Ratio: 2.79:1
+- 5 "realted" sub points: Contrast Ratio: 1.82:1
+- 1 footer element: Contrast Ratio: 2.79:1
+
+Therefore I mainly changed the text colors to white or black and made the green background slightly darker. Now no contrast error appears any more.
 
 **(0.5) Semantic HTML**
 
 Report on what happens when you try to navigate the page using a screen reader. Fix those navigation issues.
 
-*Present your reports here.*
+Identified issues:
+- The "Show comments" control is implemented as a `<div>`, which is not inherently focusable or operable via keyboard.
+- Missing ARIA roles and attributes. Would be good to provide additional context in certain areas of the website.
+- Missing "Skip to content" link to bypass repetitive navigation links.
+- Missing landmark information in the footer for better navigation. 
+
 
 **(0.5) Audio** 
 
 The ``<audio>`` player isn't accessible to hearing impaired (deaf) people — can you add some kind of accessible alternative for these users?
 
-*Present your findings and fixes here.*
+**Why It's Not Accessible to Deaf Users?**
+
+- Lack of Textual Content: Deaf users rely on visual content to understand information. An audio player without any textual alternative means that deaf users cannot access the information conveyed through the audio.
+
+- Missing Transcripts or Captions: Without transcripts or captions, the content of the audio remains inaccessible.
+
+**Solution:**
+
+- Provided an accessible transcript for deaf users 
+
+- Usage of accessible controls and ARIA attributes, ensuring that the audio player itself is accessible to all users
+
 
 **(1) Forms** 
   * The ``<input>`` element in the search form at the top could do with a label, but we don't want to add a visible text label that would potentially spoil the design and isn't really needed by sighted users. Fix this issue by adding a label that is only accessible to screen readers.
