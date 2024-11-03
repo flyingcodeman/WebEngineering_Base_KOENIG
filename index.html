@@ -11,6 +11,9 @@
   </head>
 
   <body>
+    <!-- Skip Navigation Link -->
+    <a href="#main-content" class="skip-link">Skip to content</a>
+
     <header class="header">
       <h1>Welcome to our wildlife website</h1>
     </header>
@@ -24,12 +27,24 @@
       </ul>
 
       <form class="search">
-        <input type="search" name="q" placeholder="Search query" />
-        <input type="submit" value="Go!" />
+        <!-- Visually Hidden Label for Search Input -->
+        <label for="search-query" class="visually-hidden">Search</label>
+        <input
+          type="search"
+          name="q"
+          id="search-query"
+          placeholder="Search query"
+          aria-label="Search query"
+        />
+        <input
+          type="submit"
+          value="Go!"
+          aria-label="Go"
+        />
       </form>
     </nav>
 
-    <main>
+    <main id="main-content">
       <article>
         <h2>The Trouble with Bears</h2>
         <p>
@@ -91,32 +106,46 @@
         </aside>
 
         <section class="comments">
-          <div class="show-hide">Show comments</div>
+          <!-- Show/Hide Comments Button -->
+          <button
+            class="show-hide"
+            aria-expanded="false"
+            aria-controls="comment-wrapper"
+          >
+            Show comments
+          </button>
 
-          <div class="comment-wrapper">
+          <!-- Comment Wrapper -->
+          <div class="comment-wrapper" id="comment-wrapper" hidden>
             <h2>Add Comment</h2>
 
             <form class="comment-form">
               <div class="flex-pair">
-                <label for="name">Your name:</label>
+                <label for="comment-name">Your name:</label>
                 <input
                   type="text"
                   name="name"
-                  id="name"
+                  id="comment-name"
                   placeholder="Enter your name"
+                  aria-required="true"
                 />
               </div>
               <div class="flex-pair">
-                <label for="comment">Your comment:</label>
+                <label for="user-comment">Your comment:</label>
                 <input
                   type="text"
                   name="comment"
-                  id="comment"
+                  id="user-comment"
                   placeholder="Enter your comment"
+                  aria-required="true"
                 />
               </div>
               <div>
-                <input type="submit" value="Submit comment" />
+                <input
+                  type="submit"
+                  value="Submit comment"
+                  aria-label="Submit comment"
+                />
               </div>
             </form>
 
@@ -156,7 +185,7 @@
     </main>
 
     <footer>
-      <p>&copy; 2050 by nobody. All rights reversed.</p>
+      <p>&copy; 2050 by nobody. All rights reserved.</p>
     </footer>
 
     <script src="/src/main.ts" type="module"></script>
