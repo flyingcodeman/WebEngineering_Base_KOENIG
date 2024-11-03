@@ -83,8 +83,17 @@ export const initializeCommentForm = (): void => {
  * Updates the UI with the bear data.
  * @param bears - An array of bear objects.
  */
+// src/ui.ts
+
+interface Bear {
+  name: string;
+  binomial: string;
+  image: string;
+  range: string;
+}
+
 export const updateUIWithBears = (bears: Bear[]): void => {
-  const moreBearsSection = document.querySelector('.more_bears');
+  const moreBearsSection = document.querySelector<HTMLElement>('.more_bears');
   if (!moreBearsSection) {
     console.error('More Bears section not found in the DOM.');
     return;
@@ -93,30 +102,68 @@ export const updateUIWithBears = (bears: Bear[]): void => {
   if (bears.length === 0) {
     moreBearsSection.innerHTML = '<p>No bear data available.</p>';
   } else {
-    moreBearsSection.innerHTML = ''; // Clear existing content
+    // Create table element
+    const table = document.createElement('table');
+
+    // Add caption to the table
+    const caption = document.createElement('caption');
+    caption.textContent = 'List of Various Bears';
+    table.appendChild(caption);
+
+    // Create table head
+    const thead = document.createElement('thead');
+    const headerRow = document.createElement('tr');
+
+    const headers = ['Name', 'Binomial Name', 'Image', 'Range'];
+
+    headers.forEach((headerText) => {
+      const th = document.createElement('th');
+      th.scope = 'col';
+      th.textContent = headerText;
+      headerRow.appendChild(th);
+    });
+
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+
+    // Create table body
+    const tbody = document.createElement('tbody');
+
     bears.forEach((bear: Bear) => {
-      const bearDiv = document.createElement('div');
+      const row = document.createElement('tr');
 
-      const title = document.createElement('h3');
-      title.textContent = `${bear.name} (${bear.binomial})`;
+      // Name cell
+      const nameCell = document.createElement('td');
+      nameCell.textContent = bear.name;
+      row.appendChild(nameCell);
 
+      // Binomial Name cell
+      const binomialCell = document.createElement('td');
+      binomialCell.textContent = bear.binomial;
+      row.appendChild(binomialCell);
+
+      // Image cell
+      const imageCell = document.createElement('td');
       const img = document.createElement('img');
       img.src = bear.image;
-      img.alt = bear.name;
-      img.style.width = '200px';
-      img.style.height = 'auto';
+      img.alt = `${bear.name} (${bear.binomial})`;
+      img.width = 200;
       img.onerror = () => {
         img.src = PLACEHOLDER_IMAGE_URL;
       };
+      imageCell.appendChild(img);
+      row.appendChild(imageCell);
 
-      const rangePara = document.createElement('p');
-      rangePara.innerHTML = `<strong>Range:</strong> ${bear.range}`;
+      // Range cell
+      const rangeCell = document.createElement('td');
+      rangeCell.textContent = bear.range;
+      row.appendChild(rangeCell);
 
-      bearDiv.appendChild(title);
-      bearDiv.appendChild(img);
-      bearDiv.appendChild(rangePara);
-      moreBearsSection.appendChild(bearDiv);
+      tbody.appendChild(row);
     });
+
+    table.appendChild(tbody);
+    moreBearsSection.appendChild(table);
   }
 };
 

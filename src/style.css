@@ -43,9 +43,10 @@ a {
   color: #ffffff;
 }
 
-.skip-link {
-  color: #000000 !important;
-}
+.skip-link 
+  {
+    color: #000000 !important;
+  }
 
 h1 {
   font-size: 4rem;
@@ -56,12 +57,12 @@ h1 {
 h2 {
   font-size: 3rem;
   text-align: center;
-  color: #ffffff; /* Changed to white */
+  color: #ffffff; 
 }
 
 h3 {
   font-size: 2.2rem;
-  color: #ffffff; /* Changed to white */
+  color: #ffffff; 
 }
 
 p,
@@ -167,7 +168,7 @@ footer {
 
 table {
   width: 100%;
-  background-color: #dde;
+  background-color: rgb(0, 0, 139);
   border-collapse: collapse;
 }
 
@@ -185,7 +186,51 @@ th[scope='col'] {
 }
 
 tbody tr:nth-child(odd) {
-  background-color: #def;
+  background-color: rgb(43, 43, 43);
+}
+
+/* Responsive Table */
+@media screen and (max-width: 768px) {
+  .more_bears table, 
+  .more_bears thead, 
+  .more_bears tbody, 
+  .more_bears th, 
+  .more_bears td, 
+  .more_bears tr { 
+    display: block; 
+  }
+
+  .more_bears tr { 
+    margin-bottom: 1rem; 
+  }
+
+  .more_bears th {
+    background-color: #005700;
+    color: #005700;
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  .more_bears td {
+    border: none;
+    position: relative;
+    padding-left: 50%;
+    text-align: left;
+    background-color: #005700;
+    color: #005700;
+  }
+
+  .more_bears td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 45%;
+    padding-left: 15px;
+    font-weight: bold;
+    white-space: nowrap;
+    color: #005700;
+  }
 }
 
 /* Styling content images and audio */
@@ -203,7 +248,7 @@ audio {
 /* Comments styling */
 
 .comments {
-  background-color: rgb(0, 128, 255);
+  background-color: rgb(0, 65, 129);
   padding: 10px;
 }
 
@@ -216,6 +261,13 @@ audio {
   background: #333;
   border: 0;
   color: white;
+  transition: background-color 0.3s ease;
+}
+
+/* Focus styles for the show-hide button */
+.show-hide:focus {
+  outline: 3px solid #ffcc00; 
+  background-color: #555; 
 }
 
 .comments h2 {
@@ -240,6 +292,7 @@ audio {
 .comment-form input {
   margin-left: 1rem;
   flex: 6;
+  color: black;
 }
 
 .comment-form input[type='submit'],
@@ -293,7 +346,7 @@ audio {
 
 .audio-transcript h3 {
   font-size: 2rem;
-  color: #005700; /* Dark green for headings */
+  color: #005700; 
   margin-bottom: 10px;
 }
 
