@@ -445,41 +445,83 @@ Use the tools presented in our accessibility workshop to test the accessibility 
 
 Test the current color contrast (text/background), report the results of the test, and then fix them by changing the assigned colors.
 
-*Present your reports here.*
+Initially 24 contrast errors overall.
+- h1 heading element: Contrast Ratio: 1.34:1
+- 4 navigation elem.: Contrast Ratio: 4.08:1
+- 6 heading elements: Contrast Ratio: 2.79:1
+- 7 subtext element: Contrast Ratio: 2.79:1
+- 5 "realted" sub points: Contrast Ratio: 1.82:1
+- 1 footer element: Contrast Ratio: 2.79:1
+
+Therefore I mainly changed the text colors to white or black and made the green background slightly darker. Now no contrast error appears any more.
 
 **(0.5) Semantic HTML**
 
 Report on what happens when you try to navigate the page using a screen reader. Fix those navigation issues.
 
-*Present your reports here.*
+Identified issues:
+- The "Show comments" control is implemented as a `<div>`, which is not inherently focusable or operable via keyboard.
+- Missing ARIA roles and attributes. Would be good to provide additional context in certain areas of the website.
+- Missing "Skip to content" link to bypass repetitive navigation links.
+- Missing landmark information in the footer for better navigation. 
+- Missing labels to identify elements correctly - like the search field.
+- Hard to access hidden comment section, input fields and table.
+
 
 **(0.5) Audio** 
 
 The ``<audio>`` player isn't accessible to hearing impaired (deaf) people — can you add some kind of accessible alternative for these users?
 
-*Present your findings and fixes here.*
+**Why It's Not Accessible to Deaf Users?**
+
+- Lack of Textual Content: Deaf users rely on visual content to understand information. An audio player without any textual alternative means that deaf users cannot access the information conveyed through the audio.
+
+- Missing Transcripts or Captions: Without transcripts or captions, the content of the audio remains inaccessible.
+
+**Solution:**
+
+- Provided an accessible transcript for deaf users 
+
+- Usage of accessible controls and ARIA attributes, ensuring that the audio player itself is accessible to all users
+
 
 **(1) Forms** 
   * The ``<input>`` element in the search form at the top could do with a label, but we don't want to add a visible text label that would potentially spoil the design and isn't really needed by sighted users. Fix this issue by adding a label that is only accessible to screen readers.
   * The two ``<input>`` elements in the comment form have visible text labels, but they are not unambiguously associated with their labels — how do you achieve this? Note that you'll need to update some of the CSS rule as well.
 
-*Present your findings and fixes here.*
+**Solution:**
+
+- Search field: Added a label, which is visually hidden but is accessible to screen readers with aria.
+
+- Comment section: Verified that each `<label>'s` for attribute matches the corresponding <input>'s id and that no duplicate id attributes exist across the page.
+
 
 **(0.5) Comment section**
 
 The show/hide comment control button is not currently keyboard-accessible. Can you make it keyboard accessible, both in terms of focusing it using the tab key, and activating it using the return key?
 
-*Present your findings and fixes here.*
+- Changed the div to a dedicated button and made it accessible by keyboard.
 
 **(1) The table**
 
 The data table is not currently very accessible — it is hard for screen reader users to associate data rows and columns together, and the table also has no kind of summary to make it clear what it shows. Can you add some features to your HTML to fix this problem?
 
-*Present your findings and fixes here.*
+**Solution:**
+- Updated the ui.ts function updateUIWithBears for creating a structured table,which is accessible
+- Changed the background and text colors to match a good contrast
+
 
 **(1) More Findings**
 
 What other accessibility issues did you find? Explain how you did fix them.
+
+**Findings and solutions:**
+
+- Missing lang Attribute on index.html. Solution: Added lang attribute.
+
+- Absence of ARIA Roles for Enhanced Semantic Meaning. Solution: Added a lot aria labels and controls.
+
+- Non-Descriptive Link Texts. Solution: Added some.
 
 # Extended Coding Playgrounds
 Please create a new independent Repository for these playgrounds and submit a link to it in the Moodle submission. 
